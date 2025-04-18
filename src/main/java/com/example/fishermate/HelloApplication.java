@@ -17,9 +17,12 @@ public class HelloApplication extends Application {
         String css = this.getClass().getResource("application.css").toExternalForm();
         scene.getStylesheets().add(css);
         stage.setTitle("FisherMate");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
+
+
 
     public static void main(String[] args) {
         launch();
