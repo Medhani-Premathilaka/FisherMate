@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -88,5 +89,20 @@ public class LoginController {
 
     }
 
+//    public void createAccout() {
+//        try {
+//            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Register.fxml"));
+//            Parent root = fxmlLoader.load(); // Load the FXML and get the Parent object
+//            Stage registerStage = new Stage();
+//            registerStage.initStyle(StageStyle.UNDECORATED);
+//            registerStage.setScene(new Scene(root, 520, 568)); // Pass the Parent object to the Scene
+//            registerStage.setTitle("Registration Page");
+//            registerStage.setResizable(false);
+//            registerStage.show();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+    // create in new folder
 
 }
