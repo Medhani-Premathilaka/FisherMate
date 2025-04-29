@@ -11,23 +11,37 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fishermate.LoginController">
    <children>
-      <ImageView fitHeight="425.0" fitWidth="606.0" layoutX="-3.0" layoutY="-1.0" opacity="0.86" pickOnBounds="true" preserveRatio="true" smooth="false">
-         <image>
-            <Image url="@login2.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="335.0" layoutY="24.0" prefHeight="48.0" prefWidth="144.0" text="FisherMate">
+      <TextField fx:id="username" layoutX="352.0" layoutY="129.0" prefHeight="38.0" prefWidth="226.0" promptText="Enter Username" />
+      <Button fx:id="btnlogin" layoutX="352.0" layoutY="283.0" mnemonicParsing="false" onAction="#userLoging" prefHeight="38.0" prefWidth="226.0" styleClass="btn" stylesheets="@application.css" text="Login">
          <font>
-            <Font name="System Bold Italic" size="27.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
-      </Label>
-      <TextField fx:id="username" layoutX="294.0" layoutY="97.0" prefHeight="38.0" prefWidth="225.0" promptText="Enter Username" />
-      <Button fx:id="btnlogin" layoutX="293.0" layoutY="223.0" mnemonicParsing="false" onAction="#userLoging" prefHeight="38.0" prefWidth="226.0" text="Login">
+      </Button>
+      <Label fx:id="txterror" layoutX="293.0" layoutY="72.0" prefHeight="18.0" prefWidth="226.0" style="-fx-alignment: center; -fx-font-weight: 400; -fx-text-fill: red; -fx-font-family: 'Times New Roman'; -fx-font-size: 15;" styleClass="loginlable" textAlignment="CENTER" />
+      <PasswordField fx:id="password" layoutX="352.0" layoutY="181.0" prefHeight="38.0" prefWidth="226.0" promptText="Enter Password" />
+      <AnchorPane prefHeight="400.0" prefWidth="300.0" styleClass="login" stylesheets="@application.css">
+         <children>
+            <ImageView fitHeight="87.0" fitWidth="87.0" layoutX="100.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true" AnchorPane.topAnchor="113.0">
+               <image>
+                  <Image url="@Images/login.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="78.0" layoutY="210.0" prefHeight="48.0" prefWidth="144.0" text="FisherMate" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman Bold" size="27.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnlogin1" layoutX="352.0" layoutY="336.0" mnemonicParsing="false" onAction="#closeApp" prefHeight="38.0" prefWidth="226.0" styleClass="btn" stylesheets="@application.css" text="Close">
          <font>
             <Font name="System Bold" size="17.0" />
          </font>
       </Button>
-      <Label fx:id="txterror" layoutX="293.0" layoutY="72.0" prefHeight="18.0" prefWidth="226.0" style="-fx-alignment: center; -fx-font-weight: 400; -fx-text-fill: red; -fx-font-family: 'Times New Roman'; -fx-font-size: 15;" styleClass="loginlable" textAlignment="CENTER" />
-      <PasswordField fx:id="password" layoutX="294.0" layoutY="154.0" prefHeight="38.0" prefWidth="226.0" promptText="Enter Password" />
+      <Label layoutX="352.0" layoutY="73.0" prefHeight="30.0" prefWidth="127.0" text="Welcome  back!">
+         <font>
+            <Font name="Times New Roman" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
