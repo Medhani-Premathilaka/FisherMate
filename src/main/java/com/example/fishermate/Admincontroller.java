@@ -16,10 +16,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class Admincontroller implements Initializable {
 
@@ -272,10 +269,35 @@ public void registerUser() {
         }
     }
 
-    public void displaUsername() {
-        username.setText(getData.username);
+//    public void displaUsername() {
+//            String sql = "select username from login where username = ?";
+//            DBconnection conn = new DBconnection();
+//        System.out.println("connected");
+//        try{
+//            Connection connectDB = conn.getConnection();
+//            PreparedStatement pstmt = connectDB.prepareStatement(sql);
+//            pstmt.setString(1, username.getText());
+//            ResultSet rs = pstmt.executeQuery();
+//
+//            if (rs.next()) {
+//                getData.username = rs.getString("username");
+//                username.setText(getData.username);
+//            } else {
+//                System.out.println("No username found");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+public void displaUsername() {
+    if (getData.username != null && !getData.username.isEmpty()) {
+        System.out.println("Username found: " + getData.username); // Debug log
+        username.setText(getData.username); // Display the username
+    } else {
+        System.out.println("No username found in getData");
     }
-
+}
     public void switchform(ActionEvent event){
 
             if(event.getSource()== addnewuser){

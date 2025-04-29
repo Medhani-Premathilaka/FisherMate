@@ -40,7 +40,7 @@
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="username" layoutX="90.0" layoutY="124.0" prefHeight="34.0" prefWidth="39.0" style="-fx-text-fill: white; -fx-font-family: Times New Roman;" text="User">
+            <Label fx:id="username" layoutX="90.0" layoutY="124.0" prefHeight="34.0" prefWidth="39.0" style="-fx-text-fill: white; -fx-font-family: Times New Roman;">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

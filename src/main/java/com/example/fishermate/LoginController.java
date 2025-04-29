@@ -78,8 +78,10 @@ public class LoginController  {
                 String p1 = password.getText();
                 if (u1.equals("admin") && p1.equals("admin")) {
                     adminpg(event);
+                    getData.username = "admin";
                 } else {
                     userpg(event);
+                    getData.username = username.getText();
                 }
             } else {
                 txterror.setText("Invalid login. Please try again.");
