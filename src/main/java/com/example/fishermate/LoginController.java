@@ -47,9 +47,9 @@ public class LoginController {
 
 
     }
-    public void gotopage1(ActionEvent event) throws IOException {
+    public void adminpg(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("InputDetails.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -58,6 +58,18 @@ public class LoginController {
 
 
     }
+    public void userpg(ActionEvent event) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("User.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        System.out.println("Welcome to Page 2!");
+
+
+    }
+
     public void validateLogin(ActionEvent event){
         DBconnection connectNow = new DBconnection();
         Connection connectDB = connectNow.getConnection();
@@ -76,8 +88,16 @@ public class LoginController {
             while (rs.next()){
                 if (rs.getInt(1) == 1){
                     //txterror.setText("Welcome to FisherMate");
+                    String u1 = username.getText();
+                    String p1 = password.getText();
+                    if(u1.equals("admin") && p1.equals("admin")) {
+                        //txterror.setText("Welcome to FisherMate");
+                        adminpg(event);
+                    }else {
+                        userpg(event);
+                    }
 
-                    gotopage1(event);
+
                 }else {
                     txterror.setText("Invalid login. Please try again.");
                 }
@@ -103,6 +123,14 @@ public class LoginController {
 //            e.printStackTrace();
 //        }
 //    }
+    public void closeApp() {
+        System.exit(0);
+    }
+
+    public void minimizeApp() {
+        Stage stage = (Stage) btnlogin.getScene().getWindow();
+        stage.setIconified(true);
+    }
 
 
 }
