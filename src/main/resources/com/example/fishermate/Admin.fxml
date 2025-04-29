@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="adminpane" prefHeight="484.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fishermate.AdminController">
+<AnchorPane fx:id="adminpane" prefHeight="484.0" prefWidth="831.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fishermate.Admincontroller">
    <children>
       <AnchorPane prefHeight="34.0" prefWidth="831.0" style="-fx-background-color: #00441b;">
          <children>
@@ -40,33 +40,33 @@
                   <Font name="Times New Roman" size="14.0" />
                </font>
             </Label>
-            <Label layoutX="90.0" layoutY="124.0" prefHeight="34.0" prefWidth="39.0" style="-fx-text-fill: white; -fx-font-family: Times New Roman;" text="User">
+            <Label fx:id="username" layoutX="90.0" layoutY="124.0" prefHeight="34.0" prefWidth="39.0" style="-fx-text-fill: white; -fx-font-family: Times New Roman;" text="User">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
             <Line endX="38.000030517578125" endY="-1.52587890625E-5" layoutX="110.0" layoutY="158.0" startX="-100.0" stroke="WHITE" />
-            <Button fx:id="addnewuser" layoutX="9.0" layoutY="197.0" mnemonicParsing="false" onAction="#addNew" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="+ New user" textFill="WHITE">
+            <Button fx:id="addnewuser" layoutX="9.0" layoutY="197.0" mnemonicParsing="false" onAction="#switchform" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="+ New user" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="history" layoutX="9.0" layoutY="240.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="History" textFill="WHITE">
+            <Button fx:id="history" layoutX="9.0" layoutY="240.0" mnemonicParsing="false" onAction="#switchform" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="History" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="boatrides" layoutX="9.0" layoutY="283.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="Boat Rides" textFill="WHITE">
+            <Button fx:id="boatrides" layoutX="9.0" layoutY="283.0" mnemonicParsing="false" onAction="#switchform" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="Boat Rides" textFill="WHITE">
                <font>
                   <Font name="System Italic" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="btnlogout" layoutX="15.0" layoutY="405.0" mnemonicParsing="false" onAction="#logout" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="Log out" textFill="WHITE">
+            <Button fx:id="btnlogout" layoutX="13.0" layoutY="383.0" mnemonicParsing="false" onAction="#logout" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="Log out" textFill="WHITE">
                <font>
                   <Font name="Times New Roman Bold" size="14.0" />
                </font>
             </Button>
-            <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="34.0" layoutY="416.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="27.0" fitWidth="21.0" layoutX="34.0" layoutY="394.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/logout.png" />
                </image>
@@ -121,8 +121,28 @@
                         <Font name="System Bold" size="26.0" />
                      </font>
                   </Label>
+                  <AnchorPane layoutX="403.0" layoutY="98.0" prefHeight="158.0" prefWidth="139.0" style="-fx-border-color: #00441b;">
+                     <children>
+                        <Button layoutX="35.0" layoutY="132.0" mnemonicParsing="false" onMouseClicked="#importImage" prefHeight="26.0" prefWidth="67.0" style="-fx-background-color: #00441b;" text="Import" textFill="#fff6f6">
+                           <font>
+                              <Font name="Times New Roman" size="14.0" />
+                           </font>
+                        </Button>
+                        <ImageView fx:id="newUserImage" fitHeight="125.0" fitWidth="139.0" layoutX="-1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="historypane" layoutX="207.0" layoutY="58.0" prefHeight="397.0" prefWidth="572.0" visible="false">
+         <children>
+            <Label layoutX="94.0" layoutY="110.0" text="history" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="ridespane" layoutX="226.0" layoutY="77.0" prefHeight="343.0" prefWidth="546.0" visible="false">
+         <children>
+            <Label layoutX="95.0" layoutY="76.0" text="rides" />
          </children>
       </AnchorPane>
    </children>
