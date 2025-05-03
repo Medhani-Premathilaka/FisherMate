@@ -43,7 +43,7 @@
                </font>
             </Label>
             <Line endX="38.000030517578125" endY="-1.52587890625E-5" layoutX="110.0" layoutY="158.0" startX="-100.0" stroke="WHITE" />
-            <Button fx:id="history" layoutX="9.0" layoutY="204.0" mnemonicParsing="false" onAction="#switchform" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="History" textFill="WHITE">
+            <Button fx:id="history" layoutX="9.0" layoutY="204.0" mnemonicParsing="false" onAction="#switchform" prefHeight="43.0" prefWidth="139.0" styleClass="admin-btn" stylesheets="@application.css" text="My History" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>
