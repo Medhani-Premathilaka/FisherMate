@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -219,28 +220,22 @@ public void registerUser() {
 //            e.printStackTrace();
 //        }
 //    }
-//    public void boatrides(){
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Register.fxml"));
-//            Parent root = fxmlLoader.load(); // Load the FXML and get the Parent object
-//            Stage registerStage = new Stage();
-//            registerStage.initStyle(StageStyle.UNDECORATED);
-//            registerStage.setScene(new Scene(root, 520, 568)); // Pass the Parent object to the Scene
-//            registerStage.setTitle("Registration Page");
-//            registerStage.setResizable(false);
-//            registerStage.show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
-    public void logout(){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Logout");
-        alert.setHeaderText(null);
-        alert.setContentText("Do you want to logout?");
-        alert.showAndWait();
-        onclicklogout();
+
+public void logout(ActionEvent event) {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Logout");
+    alert.setHeaderText(null);
+    alert.setContentText("Do you want to logout?");
+
+    if (alert.showAndWait().get() == ButtonType.OK) {
+        onclicklogout(); // Redirect to the login page
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close(); // Close the current admin page
+    } else  {
+        System.out.println("Logout cancelled");
+
     }
+}
 
     public void onclicklogout(){
         try {
