@@ -103,7 +103,8 @@ public void validateLogin(ActionEvent event) {
 
     try {
         Encryptor encryptor = new Encryptor();
-        String encryptedPassword = encryptor.encryptString(password.getText());
+        String a = password.getText();
+        String encryptedPassword = encryptor.encryptString(a);
 
         PreparedStatement pstmt = connectDB.prepareStatement(verifyLogin);
         pstmt.setString(1, username.getText());
@@ -113,7 +114,7 @@ public void validateLogin(ActionEvent event) {
         if (rs.next() && rs.getInt(1) == 1) {
             String u1 = username.getText();
             getData.username = u1;
-            if (u1.equals("admin")) {
+            if (u1.equals("admin") && a.equals("admin")) {
                 adminpg(event);
             } else {
                 userpg(event);
