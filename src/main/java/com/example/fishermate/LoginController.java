@@ -39,7 +39,9 @@ public class LoginController  {
 
     public void userLoging(ActionEvent event) {
         if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
+
             validateLogin(event);
+
         } else {
             txterror.setText("Please enter username and password");
         }
@@ -76,9 +78,10 @@ public class LoginController  {
             if (rs.next() && rs.getInt(1) == 1) {
                 String u1 = username.getText();
                 String p1 = password.getText();
+                getData.username = u1;
                 if (u1.equals("admin") && p1.equals("admin")) {
                     adminpg(event);
-                    getData.username = "admin";
+
                 } else {
                     userpg(event);
                     getData.username = username.getText();

@@ -131,6 +131,11 @@
                         <ImageView fx:id="newUserImage" fitHeight="125.0" fitWidth="139.0" layoutX="-1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" />
                      </children>
                   </AnchorPane>
+                  <Button fx:id="btnregister1" layoutX="288.0" layoutY="372.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #00441b; -fx-font-weight: bold;" text="Reset" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="15.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </children>
