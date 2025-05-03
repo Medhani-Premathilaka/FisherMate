@@ -34,6 +34,8 @@ public class LoginController  {
     @FXML
     private Label txterror;
 
+
+
     private Stage stage;
     private Scene scene;
 
@@ -63,36 +65,66 @@ public class LoginController  {
         stage.show();
     }
 
-    public void validateLogin(ActionEvent event) {
-        DBconnection connectNow = new DBconnection();
-        Connection connectDB = connectNow.getConnection();
+//    public void validateLogin(ActionEvent event) {
+//        DBconnection connectNow = new DBconnection();
+//        Connection connectDB = connectNow.getConnection();
+//
+//        String verifyLogin = "SELECT COUNT(1) FROM login WHERE username = ? AND password = ?";
+//
+//        try {
+//            PreparedStatement pstmt = connectDB.prepareStatement(verifyLogin);
+//            pstmt.setString(1, username.getText());
+//            pstmt.setString(2, password.getText());
+//            ResultSet rs = pstmt.executeQuery();
+//
+//            if (rs.next() && rs.getInt(1) == 1) {
+//                String u1 = username.getText();
+//                String p1 = password.getText();
+//                getData.username = u1;
+//                if (u1.equals("admin") && p1.equals("admin")) {
+//                    adminpg(event);
+//
+//                } else {
+//                    userpg(event);
+//                    getData.username = username.getText();
+//                }
+//            } else {
+//                txterror.setText("Invalid login. Please try again.");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+public void validateLogin(ActionEvent event) {
+    DBconnection connectNow = new DBconnection();
+    Connection connectDB = connectNow.getConnection();
 
-        String verifyLogin = "SELECT COUNT(1) FROM login WHERE username = ? AND password = ?";
+    String verifyLogin = "SELECT COUNT(1) FROM login WHERE username = ? AND password = ?";
 
-        try {
-            PreparedStatement pstmt = connectDB.prepareStatement(verifyLogin);
-            pstmt.setString(1, username.getText());
-            pstmt.setString(2, password.getText());
-            ResultSet rs = pstmt.executeQuery();
+    try {
+        Encryptor encryptor = new Encryptor();
+        String encryptedPassword = encryptor.encryptString(password.getText());
 
-            if (rs.next() && rs.getInt(1) == 1) {
-                String u1 = username.getText();
-                String p1 = password.getText();
-                getData.username = u1;
-                if (u1.equals("admin") && p1.equals("admin")) {
-                    adminpg(event);
+        PreparedStatement pstmt = connectDB.prepareStatement(verifyLogin);
+        pstmt.setString(1, username.getText());
+        pstmt.setString(2, encryptedPassword);
+        ResultSet rs = pstmt.executeQuery();
 
-                } else {
-                    userpg(event);
-                    getData.username = username.getText();
-                }
+        if (rs.next() && rs.getInt(1) == 1) {
+            String u1 = username.getText();
+            getData.username = u1;
+            if (u1.equals("admin")) {
+                adminpg(event);
             } else {
-                txterror.setText("Invalid login. Please try again.");
+                userpg(event);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            txterror.setText("Invalid login. Please try again.");
         }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
 
     public void closeApp() {
         System.exit(0);

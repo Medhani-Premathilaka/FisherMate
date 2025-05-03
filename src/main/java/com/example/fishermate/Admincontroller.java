@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class Admincontroller implements Initializable {
@@ -92,6 +93,7 @@ public class Admincontroller implements Initializable {
 //    public void initialize(URL url, ResourceBundle resourceBundle){
 //
 //    }resourceBundle
+    Encryptor encryptor = new Encryptor();
     private Image image;
     private PreparedStatement PreparedStatement;
 
@@ -100,7 +102,7 @@ public class Admincontroller implements Initializable {
             stage.close();
         }
 
-        public void onClickRegister(){
+        public void onClickRegister() throws NoSuchAlgorithmException {
             if(password1.getText().equals(confirmpassword.getText())){
                 System.out.println("Password Matched");
                 registerUser();
@@ -151,14 +153,15 @@ public class Admincontroller implements Initializable {
         newUserImage.setImage(null);
 
     }
-public void registerUser() {
+public void registerUser() throws NoSuchAlgorithmException {
     DBconnection conn = new DBconnection();
     Connection connectDB = conn.getConnection();
 
     String firstname = txtfname.getText();
     String lastname = txtlname.getText();
     String username = txtuname.getText();
-    String password = password1.getText();
+    String password2 = password1.getText();
+    String password = encryptor.encryptString(password2);
     String uri = getData.path.replace("\\", "\\\\"); // Escape backslashes for SQL
 
     String insertFields = "INSERT INTO login (firstname, lastname, username, password, image) VALUES (?, ?, ?, ?, ?)";
