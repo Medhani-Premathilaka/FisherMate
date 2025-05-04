@@ -1,42 +1,49 @@
 package com.example.fishermate;
 
 public class Inputs {
-
-    public int getNoOfCrewMembers() {
-        return noOfCrewMembers;
-    }
-
-    public void setNoOfCrewMembers(int noOfCrewMembers) {
-        this.noOfCrewMembers = noOfCrewMembers;
-    }
-
-    public int getMaxDays() {
-        return maxDays;
-    }
-
-    public void setMaxDays(int maxDays) {
-        this.maxDays = maxDays;
-    }
-
     private String location;
     private String dateTime;
     private int noOfCrewMembers;
     private int maxDays;
 
-    public String getLocation() {
-        return location;
+    public Inputs(String location, String dateTime, int noOfCrewMembers, int maxDays) {
+        this.location = location;
+        this.dateTime = dateTime;
+        this.noOfCrewMembers = noOfCrewMembers;
+        this.maxDays = maxDays;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public String getLocation() {
+        return location;
     }
 
     public String getDateTime() {
         return dateTime;
     }
 
+    public int getNoOfCrewMembers() {
+        return noOfCrewMembers;
+    }
+
+    public int getMaxDays() {
+        return maxDays;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
+
+    public void setNoOfCrewMembers(int noOfCrewMembers) {
+        this.noOfCrewMembers = noOfCrewMembers;
+    }
+
+    public void setMaxDays(int maxDays) {
+        this.maxDays = maxDays;
+    }
+
 
 }
