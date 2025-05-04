@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -73,7 +75,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="177.0" layoutY="46.0" prefHeight="388.0" prefWidth="640.0">
+      <AnchorPane layoutX="186.0" layoutY="47.0" prefHeight="388.0" prefWidth="640.0" visible="false">
          <children>
             <AnchorPane fx:id="registerform" layoutX="62.0" layoutY="-1.0" prefHeight="425.0" prefWidth="562.0">
                <children>
@@ -145,9 +147,48 @@
             <Label layoutX="94.0" layoutY="110.0" text="history" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="ridespane" layoutX="226.0" layoutY="77.0" prefHeight="343.0" prefWidth="546.0" visible="false">
+      <AnchorPane fx:id="ridespane" layoutX="186.0" layoutY="49.0" prefHeight="426.0" prefWidth="634.0">
          <children>
-            <Label layoutX="95.0" layoutY="76.0" text="rides" />
+            <Label layoutX="228.0" layoutY="14.0" prefHeight="59.0" prefWidth="198.0" style="-fx-text-fill: #00441b;" text="Ride CheckOut">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="90.0" styleClass="register-text" stylesheets="@application.css" text="Enter Location">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="147.0" styleClass="register-text" stylesheets="@application.css" text="Enter Date">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="205.0" styleClass="register-text" stylesheets="@application.css" text="Number of crew members">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="28.0" layoutY="269.0" styleClass="register-text" stylesheets="@application.css" text="Maximum Days">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox layoutX="28.0" layoutY="114.0" prefHeight="26.0" prefWidth="175.0" promptText="Choose Location" />
+            <DatePicker layoutX="28.0" layoutY="169.0" promptText="Choose Date" />
+            <TextField layoutX="28.0" layoutY="232.0" prefHeight="26.0" prefWidth="175.0" promptText="Choose Crew" />
+            <ComboBox editable="true" layoutX="28.0" layoutY="295.0" prefHeight="26.0" prefWidth="175.0" promptText="1 to 10 days" />
+            <Button fx:id="btnregister11" layoutX="28.0" layoutY="358.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #00441b; -fx-font-weight: bold;" text="Submit" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnregister12" layoutX="208.0" layoutY="359.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #00441b; -fx-font-weight: bold;" text="Reset" textFill="WHITE">
+               <font>
+                  <Font name="Times New Roman" size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="282.0" layoutY="90.0" prefHeight="38.0" prefWidth="268.0" />
          </children>
       </AnchorPane>
    </children>
