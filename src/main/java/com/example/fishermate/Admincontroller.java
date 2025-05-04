@@ -1,6 +1,8 @@
 package com.example.fishermate;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,10 +17,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import java.sql.Timestamp;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import java.io.File;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.List;
+
 
 public class Admincontroller implements Initializable {
 
@@ -41,6 +49,9 @@ public class Admincontroller implements Initializable {
     private Button btnregister;
 
     @FXML
+    private Button btnregister1;
+
+    @FXML
     private PasswordField confirmpassword;
 
     @FXML
@@ -48,9 +59,6 @@ public class Admincontroller implements Initializable {
 
     @FXML
     private AnchorPane historypane;
-
-    @FXML
-    private AnchorPane ridespane;
 
     @FXML
     private Label lblconfirmpassword;
@@ -71,10 +79,34 @@ public class Admincontroller implements Initializable {
     private Label lbluname;
 
     @FXML
+    private ImageView newUserImage;
+
+    @FXML
     private PasswordField password1;
 
     @FXML
     private AnchorPane registerform;
+
+    @FXML
+    private TextField ride_crew;
+
+    @FXML
+    private DatePicker ride_date;
+
+    @FXML
+    private ComboBox<String> ride_days;
+
+    @FXML
+    private ComboBox<String > ride_location;
+
+    @FXML
+    private Label ride_notice;
+
+    @FXML
+    private Button ride_submit;
+
+    @FXML
+    private AnchorPane ridespane;
 
     @FXML
     private TextField txtfname;
@@ -88,16 +120,121 @@ public class Admincontroller implements Initializable {
     @FXML
     private Label username;
 
-    @FXML
-    private ImageView newUserImage;
-//    public void initialize(URL url, ResourceBundle resourceBundle){
+    //    public void initialize(URL url, ResourceBundle resourceBundle){
 //
 //    }resourceBundle
     Encryptor encryptor = new Encryptor();
     private Image image;
     private PreparedStatement PreparedStatement;
 
-        public void close(ActionEvent event){
+    private String[] listLocation = {"Galle", "Matara", "Hambantota", "Trincomalee", "Jaffna",
+            "Negombo", "Colombo", "Batticaloa", "Kalpitiya"};
+    public void addLocation(){
+        List<String> listG = new ArrayList<>();
+
+        for(String data: listLocation){
+            listG.add(data);
+        }
+        ObservableList listData = FXCollections.observableArrayList(listG);
+        ride_location.setItems(listData);
+    }
+
+    private String[] listDays = {"1","2","3","4","5","6","7","8","9","10"};
+    public void addDays(){
+        List<String> listG = new ArrayList<>();
+
+        for(String data: listDays){
+            listG.add(data);
+        }
+        ObservableList listData = FXCollections.observableArrayList(listG);
+        ride_days.setItems(listData);
+    }
+
+    final static int FORECASTQTY = 8;
+
+    public static int realMaxDays(Inputs inputdata) {
+        int numberOfForecasts = inputdata.getMaxDays() * FORECASTQTY;
+        WeatherData data = null;
+        for (int i = 0; i < numberOfForecasts; i++) {
+            data = DBconnection.dataRetriever(inputdata);
+            if (compare(data) == -1) {
+                return i / FORECASTQTY;
+            }
+            inputdata.setDateTime(updateTime(inputdata));
+        }
+
+        return inputdata.getMaxDays();
+    }
+    public static int compare(WeatherData data) {
+
+        if (data.getRainProbability() > 70 || data.getWindSpeed() > 50 || data.isStorms()
+                || data.getVisibility() < 1000
+                || data.isLightning()) {
+            return -1;
+
+        } else {
+            return 1;
+        }
+    }
+
+    public static String updateTime(Inputs inputData) {
+
+        String updatedTime = null;
+
+        Timestamp timestamp = Timestamp.valueOf(inputData.getDateTime());
+
+        // Create Calendar to add 3 hours
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(timestamp);
+        cal.add(Calendar.HOUR_OF_DAY, 3);
+
+        // Get new Timestamp
+        Timestamp newTimestamp = new Timestamp(cal.getTimeInMillis());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        // Convert to LocalDateTime and format it
+        updatedTime = newTimestamp.toLocalDateTime().format(formatter);
+
+        return updatedTime;
+    }
+
+    public static void Consumption(Inputs inputData, int days) {
+        System.out.println("Approximating the consumptions...");
+        double water = inputData.getNoOfCrewMembers() * 25 * days;
+        System.out.println("Maximum water Consumption: " + water + " liters");
+
+        double food = inputData.getNoOfCrewMembers() * 2.5 * days;
+        System.out.println("Maximum food Consumption: " + food + " kg");
+
+        double fuel = 500 * days;
+        System.out.println("Maximum fuel Consumption: " + fuel + " liters");
+
+    }
+
+    public  void finalDecision(Inputs inputdata) {
+        WeatherData data = DBconnection.dataRetriever(inputdata);
+        System.out.println();
+        if (compare(data) == -1) {
+            System.out.println("The trip is not recommended due to bad weather conditions.");
+        } else {
+            System.out.println("The trip is recommended based on the weather conditions.");
+            if (realMaxDays(inputdata) == 0) {
+                System.out.println(
+                        "Unfortunately based on the weather condition of the rest of the day, you cannot stay for the whole day.");
+            } else if (realMaxDays(inputdata) < inputdata.getMaxDays()) {
+                System.out
+                        .println("You can only stay safely for only " + realMaxDays(inputdata) + " days.");
+                Consumption(inputdata, realMaxDays(inputdata));
+            } else {
+                System.out.println("You can stay your maximumly expected  " + inputdata.getMaxDays() + " days.");
+                Consumption(inputdata, inputdata.getMaxDays());
+            }
+
+        }
+    }
+
+    public void close(ActionEvent event){
             Stage stage = (Stage) btnclose.getScene().getWindow();
             stage.close();
         }

@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
-public class InputDataController {
+public class Inputdatacontroller {
 
     final static int FORECASTQTY = 8;
 

@@ -174,21 +174,21 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ComboBox layoutX="28.0" layoutY="114.0" prefHeight="26.0" prefWidth="175.0" promptText="Choose Location" />
-            <DatePicker layoutX="28.0" layoutY="169.0" promptText="Choose Date" />
-            <TextField layoutX="28.0" layoutY="232.0" prefHeight="26.0" prefWidth="175.0" promptText="Choose Crew" />
-            <ComboBox editable="true" layoutX="28.0" layoutY="295.0" prefHeight="26.0" prefWidth="175.0" promptText="1 to 10 days" />
-            <Button fx:id="btnregister11" layoutX="28.0" layoutY="358.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #00441b; -fx-font-weight: bold;" text="Submit" textFill="WHITE">
+            <ComboBox fx:id="ride_location" layoutX="28.0" layoutY="114.0" onMouseClicked="#addLocation" prefHeight="26.0" prefWidth="175.0" promptText="Choose Location" />
+            <DatePicker fx:id="ride_date" layoutX="28.0" layoutY="169.0" promptText="Choose Date" />
+            <TextField fx:id="ride_crew" layoutX="28.0" layoutY="232.0" prefHeight="26.0" prefWidth="175.0" promptText="Choose Crew" />
+            <ComboBox fx:id="ride_days" editable="true" layoutX="28.0" layoutY="295.0" onInputMethodTextChanged="#addDays" onMouseClicked="#addDays" prefHeight="26.0" prefWidth="175.0" promptText="1 to 10 days" />
+            <Button fx:id="ride_submit" layoutX="28.0" layoutY="358.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #00441b; -fx-font-weight: bold;" text="Submit" textFill="WHITE">
                <font>
                   <Font name="Times New Roman" size="15.0" />
                </font>
             </Button>
-            <Button fx:id="btnregister12" layoutX="208.0" layoutY="359.0" mnemonicParsing="false" onAction="#reset" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #00441b; -fx-font-weight: bold;" text="Reset" textFill="WHITE">
+            <Button fx:id="ride_reset" layoutX="208.0" layoutY="359.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" style="-fx-background-color: #00441b; -fx-font-weight: bold;" text="Reset" textFill="WHITE">
                <font>
                   <Font name="Times New Roman" size="15.0" />
                </font>
             </Button>
-            <Label layoutX="282.0" layoutY="90.0" prefHeight="38.0" prefWidth="268.0" />
+            <Label fx:id="ride_notice" layoutX="282.0" layoutY="90.0" prefHeight="38.0" prefWidth="268.0" />
          </children>
       </AnchorPane>
    </children>
