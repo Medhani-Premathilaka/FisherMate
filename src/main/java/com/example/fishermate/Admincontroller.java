@@ -90,30 +90,30 @@ public class Admincontroller implements Initializable {
 
     @FXML
     private ImageView newUserImage;
-//    public void initialize(URL url, ResourceBundle resourceBundle){
+    //    public void initialize(URL url, ResourceBundle resourceBundle){
 //
 //    }resourceBundle
     Encryptor encryptor = new Encryptor();
     private Image image;
     private PreparedStatement PreparedStatement;
 
-        public void close(ActionEvent event){
-            Stage stage = (Stage) btnclose.getScene().getWindow();
-            stage.close();
+    public void close(ActionEvent event){
+        Stage stage = (Stage) btnclose.getScene().getWindow();
+        stage.close();
+    }
+
+    public void onClickRegister() throws NoSuchAlgorithmException {
+        if(password1.getText().equals(confirmpassword.getText())){
+            System.out.println("Password Matched");
+            registerUser();
+
+            // Show the Alert
+
+        }else {
+            lblmismatch.setText("Password Mismatch");
+            //System.out.println("Password Mismatch");
         }
-
-        public void onClickRegister() throws NoSuchAlgorithmException {
-            if(password1.getText().equals(confirmpassword.getText())){
-                System.out.println("Password Matched");
-                registerUser();
-
-                // Show the Alert
-
-            }else {
-                lblmismatch.setText("Password Mismatch");
-                //System.out.println("Password Mismatch");
-            }
-        }
+    }
 
 //        public  void registerUser(){
 //            DBconnection conn = new DBconnection();
@@ -153,46 +153,46 @@ public class Admincontroller implements Initializable {
         newUserImage.setImage(null);
 
     }
-public void registerUser() throws NoSuchAlgorithmException {
-    DBconnection conn = new DBconnection();
-    Connection connectDB = conn.getConnection();
+    public void registerUser() throws NoSuchAlgorithmException {
+        DBconnection conn = new DBconnection();
+        Connection connectDB = conn.getConnection();
 
-    String firstname = txtfname.getText();
-    String lastname = txtlname.getText();
-    String username = txtuname.getText();
-    String password2 = password1.getText();
-    String password = encryptor.encryptString(password2);
-    String uri = getData.path.replace("\\", "\\\\"); // Escape backslashes for SQL
+        String firstname = txtfname.getText();
+        String lastname = txtlname.getText();
+        String username = txtuname.getText();
+        String password2 = password1.getText();
+        String password = encryptor.encryptString(password2);
+        String uri = getData.path.replace("\\", "\\\\"); // Escape backslashes for SQL
 
-    String insertFields = "INSERT INTO login (firstname, lastname, username, password, image) VALUES (?, ?, ?, ?, ?)";
+        String insertFields = "INSERT INTO login (firstname, lastname, username, password, image) VALUES (?, ?, ?, ?, ?)";
 
-    try {
-        PreparedStatement pstmt = connectDB.prepareStatement(insertFields);
-        pstmt.setString(1, firstname);
-        pstmt.setString(2, lastname);
-        pstmt.setString(3, username);
-        pstmt.setString(4, password);
-        pstmt.setString(5, uri);
+        try {
+            PreparedStatement pstmt = connectDB.prepareStatement(insertFields);
+            pstmt.setString(1, firstname);
+            pstmt.setString(2, lastname);
+            pstmt.setString(3, username);
+            pstmt.setString(4, password);
+            pstmt.setString(5, uri);
 
-        pstmt.executeUpdate();
+            pstmt.executeUpdate();
 
-        reset();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Registration Successful");
-        alert.setHeaderText(null);
-        alert.setContentText("Your registration was successful!");
-        alert.showAndWait();
+            reset();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Registration Successful");
+            alert.setHeaderText(null);
+            alert.setContentText("Your registration was successful!");
+            alert.showAndWait();
 
-        //Platform.exit(); // Close the application after successful registration
-    } catch (SQLException e) {
-        e.printStackTrace();
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Registration Failed");
-        alert.setHeaderText(null);
-        alert.setContentText("An error occurred during registration. Please try again.");
-        alert.showAndWait();
+            //Platform.exit(); // Close the application after successful registration
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Registration Failed");
+            alert.setHeaderText(null);
+            alert.setContentText("An error occurred during registration. Please try again.");
+            alert.showAndWait();
+        }
     }
-}
 
 
     public void addNew(){
@@ -224,21 +224,21 @@ public void registerUser() throws NoSuchAlgorithmException {
 //        }
 //    }
 
-public void logout(ActionEvent event) {
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Logout");
-    alert.setHeaderText(null);
-    alert.setContentText("Do you want to logout?");
+    public void logout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Logout");
+        alert.setHeaderText(null);
+        alert.setContentText("Do you want to logout?");
 
-    if (alert.showAndWait().get() == ButtonType.OK) {
-        onclicklogout(); // Redirect to the login page
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close(); // Close the current admin page
-    } else  {
-        System.out.println("Logout cancelled");
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            onclicklogout(); // Redirect to the login page
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close(); // Close the current admin page
+        } else  {
+            System.out.println("Logout cancelled");
 
+        }
     }
-}
 
     public void onclicklogout(){
         try {
@@ -267,7 +267,7 @@ public void logout(ActionEvent event) {
         }
     }
 
-//    public void displaUsername() {
+    //    public void displaUsername() {
 //            String sql = "select username from login where username = ?";
 //            DBconnection conn = new DBconnection();
 //        System.out.println("connected");
@@ -288,32 +288,32 @@ public void logout(ActionEvent event) {
 //        }
 //
 //    }
-public void displaUsername() {
-    if (getData.username != null && !getData.username.isEmpty()) {
-        System.out.println("Username found: " + getData.username); // Debug log
-        username.setText(getData.username); // Display the username
-    } else {
-        System.out.println("No username found in getData");
+    public void displaUsername() {
+        if (getData.username != null && !getData.username.isEmpty()) {
+            System.out.println("Username found: " + getData.username); // Debug log
+            username.setText(getData.username); // Display the username
+        } else {
+            System.out.println("No username found in getData");
+        }
     }
-}
     public void switchform(ActionEvent event){
 
-            if(event.getSource()== addnewuser){
-                registerform.setVisible(true);
-                historypane.setVisible(false);
-                ridespane.setVisible(false);
+        if(event.getSource()== addnewuser){
+            registerform.setVisible(true);
+            historypane.setVisible(false);
+            ridespane.setVisible(false);
 
-            } else if (event.getSource() == history) {
-                registerform.setVisible(false);
-                historypane.setVisible(true);
-                ridespane.setVisible(false);
+        } else if (event.getSource() == history) {
+            registerform.setVisible(false);
+            historypane.setVisible(true);
+            ridespane.setVisible(false);
 
-            }else if (event.getSource() == boatrides) {
-                registerform.setVisible(false);
-                historypane.setVisible(false);
-                ridespane.setVisible(true);
+        }else if (event.getSource() == boatrides) {
+            registerform.setVisible(false);
+            historypane.setVisible(false);
+            ridespane.setVisible(true);
 
-            }
+        }
     }
 
 
